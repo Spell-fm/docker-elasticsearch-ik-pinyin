@@ -1,10 +1,15 @@
-ARG ES_VERSION=8.1.2
+ARG ES_VERSION=8.4.1
 
 FROM docker.elastic.co/elasticsearch/elasticsearch:${ES_VERSION}
 LABEL org.opencontainers.image.authors="Phoenix Gao (phoenix@spell.fm)"
 
-RUN /usr/share/elasticsearch/bin/elasticsearch-plugin install --batch \
-    https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v${ES_VERSION}/elasticsearch-analysis-ik-${ES_VERSION}.zip
+ARG PLUGIN_VERSION=8.4.1
 
 RUN /usr/share/elasticsearch/bin/elasticsearch-plugin install --batch \
-    https://github.com/medcl/elasticsearch-analysis-pinyin/releases/download/v${ES_VERSION}/elasticsearch-analysis-pinyin-${ES_VERSION}.zip
+    analysis-icu
+
+RUN /usr/share/elasticsearch/bin/elasticsearch-plugin install --batch \
+    https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v${PLUGIN_VERSION}/elasticsearch-analysis-ik-${PLUGIN_VERSION}.zip
+
+RUN /usr/share/elasticsearch/bin/elasticsearch-plugin install --batch \
+    https://github.com/medcl/elasticsearch-analysis-pinyin/releases/download/v${PLUGIN_VERSION}/elasticsearch-analysis-pinyin-${PLUGIN_VERSION}.zip
