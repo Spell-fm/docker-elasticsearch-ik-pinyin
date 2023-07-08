@@ -1,9 +1,9 @@
-ARG ES_VERSION=8.5.2
+ARG ES_VERSION=8.8.1
 
 FROM docker.elastic.co/elasticsearch/elasticsearch:${ES_VERSION}
 LABEL org.opencontainers.image.authors="Phoenix Gao (phoenix@spell.fm)"
 
-ARG PLUGIN_VERSION=8.5.2
+ARG PLUGIN_VERSION=8.8.1
 
 RUN /usr/share/elasticsearch/bin/elasticsearch-plugin install --batch \
     analysis-icu
